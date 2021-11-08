@@ -1,0 +1,54 @@
+// import tainwind css
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// import antd styles
+@import "~antd/dist/antd.less";
+
+
+.water-item {
+  animation: waterIncrease 2s linear;
+  height: 32px;
+}
+
+.decrease .water-item {
+  animation: waterDecrease 2s linear;
+  height: 0px;
+}
+
+@keyframes waterIncrease {
+  from { height: 0px; }
+  to { height: 32px; }
+}
+
+@keyframes waterDecrease {
+  from { height: 32px; }
+  to { height: 0px; }
+}
+
+body {
+  .bathtub {
+    width: 90px;
+    height: 100px;
+    background: #000;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+
+    .fill {
+      transform: translate(0, 100px);
+      transition: all cubic-bezier(1, 1, 1, 1) 10s;
+    }
+
+    .wave-shape {
+      animation-name: waveAction;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-duration: 0.5s;
+      width: 300px;
+      height: 150px;
+      fill: #04ACFF;
+    }
+  }
+}
