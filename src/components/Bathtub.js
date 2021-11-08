@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 
 export default function Bathtub() {
-  const [currentHeight, setCurrentHeight] = useState(0);
+  // const [currentHeight, setCurrentHeight] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(0);
+  const [changeWaterLevel, setChangeWaterLevel] = useState(false);
 
   const fillWater = (isFill = false, times = 5) => {
+    if (isFill && currentLevel === 5) {
+      alert('Bathtub is filled water fully.');
+      return;
+    }
+
+    if (!isFill && currentLevel === 0) {
+      alert('Bathtub is empty. Please fill water.');
+      return;
+    }
+    
+    setChangeWaterLevel(true);
+
     const bathtubElem = document.querySelector('.bathtub-v');
     const height = bathtubElem.clientHeight // get container height
     const perHeight = height / 5;
@@ -16,24 +29,19 @@ export default function Bathtub() {
 
     setTimeout(() => {
       if (isFill) {
-        if (bathtubElem.children.length === 5) {
-          alert('Bathtub is filled water fully.');
-          return;
-        }
-
         bathtubElem.appendChild(emptyDiv);
-        setCurrentHeight(perHeight * (5 - times + 1));
+        // setCurrentHeight(perHeight * (5 - times + 1));
         setCurrentLevel(5 - times + 1);
-      } else {
-        if (bathtubElem.children.length === 0) {
-          alert('Bathtub is empty. Please fill water.');
-          return;
-        }
 
-        setCurrentHeight(height - perHeight * (5 - times + 1));
+        if ((times - 1) === 0) {
+          setChangeWaterLevel(false);
+        }
+      } else {
+        // setCurrentHeight(height - perHeight * (5 - times + 1));
         setCurrentLevel(times - 1);
 
         if ((times - 1) === 0) {
+          setChangeWaterLevel(false);
           return;
         };
         bathtubElem.removeChild(bathtubElem.firstChild);
@@ -44,19 +52,21 @@ export default function Bathtub() {
 
 
     // since the translate Y is backward (full is 0px, empty is 150px), then the fill portion must be backward to (the first click is 75%, second click is 50%, last click is 0%)
-    document.querySelector('.bathtub .fill').style.transform = 'translate(0, ' + ((100 - (isFill ? 100 : 0)) / 100) * height + 'px)'
+    document.querySelector('.bathtub .fill').style.transform = 'translate(0, ' + ((100 - (isFill ? 100 : 0)) / 100) * height + 'px)';
   }
 
   return(
     <div className="container p-4">
       <div className="mb-3 flex">
         <button
-          className='bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded mr-2 flex items-center'
+          disabled={changeWaterLevel}
+          className={`bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded mr-2 flex items-center ${changeWaterLevel ? ' opacity-50 cursor-not-allowed' : ''}`}
           onClick={() => fillWater(true, 5)}>
           Increase Water Level
         </button>
         <button
-          className='bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded mr-2 flex items-center'
+          disabled={changeWaterLevel}
+          className={`bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded mr-2 flex items-center ${changeWaterLevel ? ' opacity-50 cursor-not-allowed' : ''}`}
           onClick={() => fillWater(false, 5)}>
           Decrease Water Level
         </button>
