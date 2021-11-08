@@ -17,7 +17,10 @@ export default function Bath() {
 
         for (let i=0; i<waterLevel; i++) {
             blocks.push(
-                <div className="w-full bg-blue-500 water-item" key={i} />
+                <div
+                    className="w-full bg-blue-500 water-item"
+                    key={i}
+                />
             );
         }
 

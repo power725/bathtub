@@ -62,7 +62,7 @@ export default function Bathtub() {
         </button>
       </div>
 
-      <div className="relative ml-24">
+      <div className="relative ml-24 inline-block">
         <div className='invisible bathtub-v bathtub flex flex-col-reverse'></div>
 
         <div className="bathtub absolute top-0">
@@ -87,8 +87,10 @@ export default function Bathtub() {
             </svg>
           </div>
         </div>
-        <span className="absolute text-white top-10">
-          Level: {currentLevel} <br />Height: {currentHeight}px
+        <span
+          className="absolute text-white top-2/4 left-2/4 font-bold"
+          style={{ marginTop: '-11px', marginLeft: '-23px' }}>
+          Level: {currentLevel}
         </span>
       </div>
     </div>

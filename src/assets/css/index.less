@@ -14,7 +14,7 @@
 
 .decrease .water-item {
   animation: waterDecrease 2s linear;
-  height: 0px;
+  height: 32px;
 }
 
 @keyframes waterIncrease {
@@ -29,15 +29,15 @@
 
 body {
   .bathtub {
-    width: 90px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background: #000;
     overflow: hidden;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
 
     .fill {
-      transform: translate(0, 100px);
+      transform: translate(0, 150px);
       transition: all cubic-bezier(1, 1, 1, 1) 10s;
     }
 
